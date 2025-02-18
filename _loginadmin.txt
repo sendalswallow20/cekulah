@@ -1,0 +1,2 @@
+uname: admin
+pass: sd12345
