@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Demo</title>
+    <link href="rich-text-editor.min.css" rel="stylesheet">
+    <style>
+    .rich-text-editor-view img {
+      min-width:2em;
+      min-height:2em;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Custom Tool: Image</h1>
+    <p><textarea>Lorem ipsum dolor sit amet.</textarea></p>
+    <script src="rich-text-editor.min.js"></script>
+    <script>
+
+    var editor = new RTE(document.querySelector('textarea'), {
+        tags: [
+            'a',
+            'abbr',
+            'b',
+            'br',
+            'code',
+            'del',
+            'em',
+            'i',
+            'img', // add `img` to the tag list
+            'ins',
+            'kbd',
+            'mark',
+            'p',
+            'span',
+            'strong',
+            'u'
+        ],
+        attributes: [
+            'alt', // add `alt` to the attribute list
+            'class',
+            'href',
+            'id',
+            'rel',
+            'src', // add `src` to the attribute list
+            'style',
+            'target',
+            'title'
+        ]
+    });
+
+    editor.t('img', ['Insert Image', 'svg:M5.656 9l-2.313 3h9.313l-3-4-2.313 3zM14 12.656c0 0.719-0.625 1.344-1.344 1.344h-9.313c-0.719 0-1.344-0.625-1.344-1.344v-9.313c0-0.719 0.625-1.344 1.344-1.344h9.313c0.719 0 1.344 0.625 1.344 1.344v9.313z'], function() {
+        var $ = this,
+            picker = document.createElement('input'),
+            img = $.e('img');
+        picker.type = 'file';
+        picker.style.cssText = 'font:normal normal 1px/1px serif;margin:0;padding:0;width:1px;height:1px;border:0;overflow:hidden;position:absolute;top:-1px;left:-1px;opacity:0;';
+        document.body.appendChild(picker);
+        picker.onchange = function() {
+            var self = this.files[0],
+                reader = new FileReader(), v;
+            if (self.type.indexOf('image/') !== 0) {
+                alert('Image only!');
+                $.focus();
+            } else {
+                reader.onloadend = function() {
+                    v = reader.result;
+                    if (img) {
+                        img.src = v;
+                    } else {
+                        $.i('<img alt="" src="' + v + '">', 0);
+                    }
+                };
+                reader.readAsDataURL(self);
+            }
+        };
+        picker.click(); // open a file…
+        picker.parentNode && picker.parentNode.removeChild(picker);
+    }, -1);
+
+    </script>
+  </body>
+</html>

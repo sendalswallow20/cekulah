@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Demo</title>
+    <link href="rich-text-editor.css" rel="stylesheet">
+  </head>
+  <body>
+    <p><textarea>Lorem ipsum dolor sit amet.</textarea></p>
+    <p>
+      <button onclick="editor.focus();">Focus (default)</button>
+      <button onclick="editor.focus(0);">Focus Start</button>
+      <button onclick="editor.focus(1);">Focus End</button>
+      <button onclick="editor.focus(true);">Select All</button>
+    </p>
+    <script src="rich-text-editor.js"></script>
+    <script>
+
+    var editor = new RTE(document.querySelector('textarea'));
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Demo</title>
+    <link href="rich-text-editor.css" rel="stylesheet">
+    <style>
+    .rich-text-editor-t\:s span {text-decoration:line-through}
+    </style>
+  </head>
+  <body>
+    <p><textarea>Lorem ipsum dolor sit amet.</textarea></p>
+    <script src="rich-text-editor.js"></script>
+    <script>
+
+    var editor = new RTE(document.querySelector('textarea'));
+
+    editor.t('s', ['Delete', 'svg:M2 9.344v-1.344h12v1.344h-12zM3.344 2.656h9.313v2h-3.313v2h-2.688v-2h-3.313v-2zM6.656 12.656v-2h2.688v2h-2.688z'], function() {
+        this.w('del', -1);
+        console.log(arguments);
+    }, -1);
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Demo</title>
+    <link href="rich-text-editor.css" rel="stylesheet">
+  </head>
+  <body>
+    <p><mark>previous</mark></p>
+    <p><mark>before</mark><textarea>Lorem ipsum dolor sit amet.</textarea><mark>after</mark></p>
+    <p><mark>next</mark></p>
+    <p>
+      <button onclick="editor.create();">Create</button>
+      <button onclick="editor.destroy();">Destroy</button>
+    </p>
+    <script src="rich-text-editor.js"></script>
+    <script>
+
+    var editor = (new RTE(document.querySelector('textarea'))).destroy();
+
+    </script>
+  </body>
+</html>

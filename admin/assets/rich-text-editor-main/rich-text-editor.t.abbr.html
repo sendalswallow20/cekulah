@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Demo</title>
+    <link href="rich-text-editor.min.css" rel="stylesheet">
+    <style>
+    .rich-text-editor-view code {font-family:'Courier New',Courier,'Nimbus Mono L',Monospace}
+    </style>
+  </head>
+  <body>
+    <h1>Custom Tool: Abbreviation</h1>
+    <p><textarea>Lorem ipsum dolor sit amet.</textarea></p>
+    <script src="rich-text-editor.min.js"></script>
+    <script>
+
+    var editor = new RTE(document.querySelector('textarea'));
+
+    editor.t('abbr', ['Abbreviation', 'svg:M8 5.344c-1.094 0-2-0.906-2-2s0.906-2 2-2 2 0.906 2 2-0.906 2-2 2zM8 7.688c1.563-1.469 3.688-2.344 6-2.344v7.313c-2.313 0-4.438 0.906-6 2.375-1.563-1.469-3.688-2.375-6-2.375v-7.313c2.313 0 4.438 0.875 6 2.344z'], function() {
+        var previous_abbr = this.e('abbr'),
+            abbr = previous_abbr || this.w('abbr', 1, 'text here…'); // force wrap
+        if (this.is.dialog) {
+            this.d.x(true); // cancel
+            abbr = this.e('abbr');
+            if (abbr && !abbr.title) {
+                this.w('abbr', 0); // force unwrap
+            }
+        } else {
+            this.d('Meaning here…', abbr && abbr.title || "", function(e, input) {
+                if (input.value) {
+                    abbr.title = input.value;
+                } else {
+                    this.w('abbr', 0); // force unwrap
+                }
+            });
+        }
+    }, -1);
+
+    </script>
+  </body>
+</html>
